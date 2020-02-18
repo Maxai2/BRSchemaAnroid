@@ -11,9 +11,10 @@ public class Table_Object {
     public int MinGuests;
     public int Number;
     public String Size;
+    public String Figure;
 
     public Table_Object(int Id, String Key, String Src, int Angle, String Pos, String Group,
-                        int MaxGuests, int MinGuests, int Number, String Size) {
+                        int MaxGuests, int MinGuests, int Number, String Size, String Figure) {
         this.Id = Id;
         this.Key = Key;
         this.Src = Src;
@@ -24,5 +25,6 @@ public class Table_Object {
         this.MinGuests = MinGuests;
         this.Number = Number;
         this.Size = Size;
+        this.Figure = Figure;
     }
 }

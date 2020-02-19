@@ -82,8 +82,7 @@ public class SchemeDrawer extends View {
 //            ratio*= MainActivity.height/hallHeight;
 //        }
 
-        for (Group_Array group: scheme_element.group_arrays
-             ) {
+        for (Group_Array group: scheme_element.group_arrays) {
             posX.add(Integer.parseInt(group.Pos.substring(0, group.Pos.indexOf(" "))));
             posY.add(Integer.parseInt(group.Pos.substring(group.Pos.indexOf(" ") + 1)));
         }
@@ -97,13 +96,13 @@ public class SchemeDrawer extends View {
             toAdd = (MainActivity.height - (this.GetHeight(scheme_element.group_arrays[0].Size)*ratio)) / 2;
         } else {
             double a1 = this.GetWidth(scheme_element.group_arrays[0].Size);
-            double a2 = MainActivity.width - a1;
-            double a3 = a2 * ratio;
+            double a2 = a1 * ratio;
+            double a3 = MainActivity.width - a2;
             double a4 = a3 / 2;
-            toAdd = (MainActivity.width - this.GetWidth(scheme_element.group_arrays[0].Size)*ratio) / 2;
+            toAdd = (MainActivity.width - (this.GetWidth(scheme_element.group_arrays[0].Size)*ratio)) / 2;
         }
-        double offsetX = isWidthRatio ? Collections.min(posX) * -1 : Collections.min(posX) + toAdd;
-        double offsetY = isWidthRatio ? Collections.min(posY) * -1 + toAdd : Collections.min(posY);
+        double offsetX = isWidthRatio ? Collections.min(posX) * -1 : Collections.min(posX) * -1 + toAdd;
+        double offsetY = isWidthRatio ? Collections.min(posY) * -1 + toAdd : Collections.min(posY) * -1;
 
 
 
@@ -131,12 +130,64 @@ public class SchemeDrawer extends View {
 
         canvas.drawRect((int)left, (int)top, (int)right, (int)bottom, p);
 
-        p.setStyle(Paint.Style.STROKE);
-        p.setColor(Color.BLACK);
+        //p.setStyle(Paint.Style.STROKE);
+        //p.setColor(Color.BLACK);
+
+        double startX = left;
+        double startY = top;
 
         for (Hall_Object obj : scheme_element.hall_objects) {
-            if (obj.Key.contains("wr")) {
-//                obj.
+
+            if(obj.Key.startsWith("wi")){
+                p.setColor(Color.rgb(228, 240, 245));
+
+            }
+            // walls
+            else if (obj.Key.startsWith("w")){
+                p.setColor(Color.rgb(21,1,3));
+            }
+            // chairs
+            else if(obj.Key.startsWith("ch")){
+                p.setColor(Color.rgb(3,200,0));
+            }
+            // doors
+            else if(obj.Key.startsWith("d")){
+                p.setColor(Color.rgb(255,253,141));
+            }
+            // rectangle
+            if (obj.Figure.equals("Rectangle")) {
+                double l = startX + (this.GetX(obj.Pos) + offsetX - startX)* ratio;
+                double t = startY + (this.GetY(obj.Pos) + offsetY - startY) * ratio;
+                double r = l + this.GetWidth(obj.Size) * ratio;
+                double b = t + this.GetHeight(obj.Size) * ratio;
+                canvas.drawRect((int)l, (int)t, (int)r, (int)b, p);
+            }
+
+            // circle
+            else {
+
+            }
+
+        }
+        p.setColor(Color.rgb(93, 23, 65));
+        for (Table_Object table : scheme_element.table_objects) {
+
+            if (table.Figure.equals("Rectangle")) {
+                double l = startX + (this.GetX(table.Pos) + offsetX - startX)* ratio;
+                double t = startY + (this.GetY(table.Pos) + offsetY - startY) * ratio;
+                double r = l + this.GetWidth(table.Size) * ratio;
+                double b = t + this.GetHeight(table.Size) * ratio;
+                canvas.drawRect((int)l, (int)t, (int)r, (int)b, p);
+            }
+            else {
+
+                double radius = (this.GetWidth(table.Size) * ratio) / 2;
+                double centerX = startX + (this.GetX(table.Pos) + offsetX - startX)* ratio + radius;
+                double centerY = startY + (this.GetY(table.Pos) + offsetY - startY) * ratio + radius;
+
+                p.setAntiAlias(true);
+
+                canvas.drawCircle((int)centerX, (int)centerY, (int)radius, p);
             }
         }
     }

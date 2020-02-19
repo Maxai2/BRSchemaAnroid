@@ -6,6 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+
 public class SchemeDrawer extends View {
 
     public SchemeDrawer (Context context) {
@@ -52,32 +57,103 @@ public class SchemeDrawer extends View {
                 new Group_Array("G1", 0, "-380 -80", "840 400", "Rectangle")
         };
 
-        Scheme_Element se = new Scheme_Element(1, "Main", table_objects, hall_objects, group_arrays);
+        Scheme_Element scheme_element = new Scheme_Element(1, "MainHall", table_objects, hall_objects, group_arrays);
 
 //        p.setStyle(Paint.Style.FILL);
 //        p.setColor(Color.rgb(128, 128, 128));
 //        canvas.drawPaint(p);
+        
+        
+        boolean isWidthRatio = true;
+        ArrayList<Integer> posX = new ArrayList<Integer>();
+        ArrayList<Integer> posY = new ArrayList<Integer>();
 
-        String hallSize = se.group_arrays[0].Size;
-        int hallWidth = Integer.parseInt(hallSize.substring(0, hallSize.indexOf(" ")));
-        int hallHeight = Integer.parseInt(hallSize.substring(hallSize.indexOf(" ") + 1));
+        String hallSize = scheme_element.group_arrays[0].Size;
+        double hallWidth = Double.parseDouble(hallSize.substring(0, hallSize.indexOf(" ")));
+        double hallHeight = Double.parseDouble(hallSize.substring(hallSize.indexOf(" ") + 1));
+
+        double ratio =  (double)MainActivity.width / hallWidth;
+
+        if(hallHeight * ratio > MainActivity.height) {
+            ratio = (double)MainActivity.height / hallHeight;
+            isWidthRatio = false;
+        }
+//        if(hallWidth/hallHeight > (double)MainActivity.width/MainActivity.height) {
+//            ratio*= MainActivity.height/hallHeight;
+//        }
+
+        for (Group_Array group: scheme_element.group_arrays
+             ) {
+            posX.add(Integer.parseInt(group.Pos.substring(0, group.Pos.indexOf(" "))));
+            posY.add(Integer.parseInt(group.Pos.substring(group.Pos.indexOf(" ") + 1)));
+        }
+
+        double toAdd;
+        if(isWidthRatio) {
+            double a1 = this.GetHeight(scheme_element.group_arrays[0].Size);
+            double a2 = a1 * ratio;
+            double a3 = MainActivity.height - a2;
+            double a4 = a3 / 2;
+            toAdd = (MainActivity.height - (this.GetHeight(scheme_element.group_arrays[0].Size)*ratio)) / 2;
+        } else {
+            double a1 = this.GetWidth(scheme_element.group_arrays[0].Size);
+            double a2 = MainActivity.width - a1;
+            double a3 = a2 * ratio;
+            double a4 = a3 / 2;
+            toAdd = (MainActivity.width - this.GetWidth(scheme_element.group_arrays[0].Size)*ratio) / 2;
+        }
+        double offsetX = isWidthRatio ? Collections.min(posX) * -1 : Collections.min(posX) + toAdd;
+        double offsetY = isWidthRatio ? Collections.min(posY) * -1 + toAdd : Collections.min(posY);
+
+
+
+
+
+
+
 
         p.setStyle(Paint.Style.FILL);
         p.setColor(Color.LTGRAY);
 
-        int right = hallWidth * (MainActivity.width / hallWidth);
-        int bottom = hallHeight * (MainActivity.height / hallHeight);
-        int left = (MainActivity.width - right);
-        int top = (MainActivity.height - bottom);
-        canvas.drawRect(left, top, right, bottom, p);
+
+//        int right = hallWidth * (MainActivity.width / hallWidth);
+//        int bottom = hallHeight * (MainActivity.height / hallHeight);
+//        int left = (MainActivity.width - right);
+//        int top = (MainActivity.height - bottom);
+//        canvas.drawRect(left, top, right, bottom, p);
+
+
+        double left = this.GetX(scheme_element.group_arrays[0].Pos) + offsetX;
+        double top = this.GetY(scheme_element.group_arrays[0].Pos) + offsetY;
+        double right = left + hallWidth * ratio;
+        double bottom = top + hallHeight * ratio;
+
+
+        canvas.drawRect((int)left, (int)top, (int)right, (int)bottom, p);
 
         p.setStyle(Paint.Style.STROKE);
         p.setColor(Color.BLACK);
 
-        for (Hall_Object obj : se.hall_objects) {
+        for (Hall_Object obj : scheme_element.hall_objects) {
             if (obj.Key.contains("wr")) {
 //                obj.
             }
         }
+    }
+
+    public double GetX(String pos){
+        return Double.parseDouble(pos.substring(0, pos.indexOf(" ")));
+    }
+
+    public double GetY(String pos) {
+        return Double.parseDouble(pos.substring(pos.indexOf(" ") + 1));
+    }
+
+    public double GetWidth(String size){
+        return Double.parseDouble(size.substring(0, size.indexOf(" ")));
+    }
+
+    public double GetHeight(String size){
+        return Double.parseDouble(size.substring(size.indexOf(" ") + 1));
     }
 }

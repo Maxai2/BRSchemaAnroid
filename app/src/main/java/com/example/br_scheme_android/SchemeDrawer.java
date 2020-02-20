@@ -59,6 +59,86 @@ public class SchemeDrawer extends View {
 
         Scheme_Element scheme_element = new Scheme_Element(1, "MainHall", table_objects, hall_objects, group_arrays);
 
+
+
+//        Table_Object[] table_objects = {
+//                new Table_Object(1, "tr", "", 0, "-340.5 -40.5", "G1", 6, 3, 1, "60 60", "Rectangle"),
+//                new Table_Object(2, "tr2", "", 0, "-340.5 159.5", "G1", 4, 2, 2, "60 60", "Rectangle"),
+//                new Table_Object(2, "tc", "", 0, "-140.5 159.5", "G1", 4, 2, 2, "60 60", "Circle"),
+//                new Table_Object(2, "tr2", "", 0, "239.5 -60.5", "G1", 4, 2, 2, "60 60", "Rectangle"),
+//                new Table_Object(2, "tc3", "", 0, "-0.5 39.5", "G1", 4, 2, 2, "60 60", "Circle"),
+//                new Table_Object(1, "tr", "", 0, "99.5 199.5", "G1", 6, 3, 1, "60 60", "Rectangle"),
+//                new Table_Object(2, "tc", "", 0, "-140.5 -80.5", "G1", 4, 2, 2, "60 60", "Circle"),
+//        };
+//
+//        Hall_Object[] hall_objects = {
+//                new Hall_Object("wr", "", 0, "-420.5 -120.5", "G1", "20 420", "Rectangle"),
+//                new Hall_Object("wr2", "", 0, "-400.5 -120.5", "G1", "140 20", "Rectangle"),
+//                new Hall_Object("wr3", "", 0, "--180.5 -120.5", "G1", "340 20", "Rectangle"),
+//                new Hall_Object("wr4", "", 0, "239.5 -120.5", "G1", "120 20", "Rectangle"),
+//                new Hall_Object("wr5", "", 0, "339.5 -100.5", "G1", "20 140", "Rectangle"),
+//                new Hall_Object("wr6", "", 0, "-20.5 279.5", "G1", "200 20", "Rectangle"),
+//                new Hall_Object("wr", "", 0, "-400.5 279.5", "G1", "240 20", "Rectangle"),
+//                new Hall_Object("wr", "", 0, "179.5 139.5", "G1", "20 160", "Rectangle"),
+//                new Hall_Object("wr", "", 0, "199.5 139.5", "G1", "160 20", "Rectangle"),
+//
+//
+//                new Hall_Object("wir", "", 0, "-260.5 -120.5", "G1", "80 20", "Rectangle"),
+//                new Hall_Object("wir2", "", 0, "-160.5 279.5", "G1", "140 20", "Rectangle"),
+//                new Hall_Object("wir2", "", 0, "159.5 -120.5", "G1", "80 20", "Rectangle"),
+//
+//                new Hall_Object("dr", "", 0, "339.5 39.5", "G1", "20 100", "Rectangle"),
+//
+//                new Hall_Object("chr", "", 0, "-380.5 -20.5", "G1", "20 20", "Rectangle"),
+//
+//
+//                new Hall_Object("chr2", "", 0, "-320.5 -80.5", "G1", "20 20", "Rectangle"),
+//
+//                new Hall_Object("chr3", "", 0, "-260.5 -20.5", "G1", "20 20", "Rectangle"),
+//
+//                new Hall_Object("chr4", "", 0, "-320.5 39.5", "G1", "20 20", "Rectangle"),
+//
+//                new Hall_Object("chr5", "", 0, "-320.5 239.5", "G1", "20 20", "Rectangle"),
+//
+//                new Hall_Object("chr6", "", 0, "-380.5 179.5", "G1", "20 20", "Rectangle"),
+//
+//                new Hall_Object("chr7", "", 0, "-320.5 119.5", "G1", "20 20", "Rectangle"),
+//
+//                new Hall_Object("chr8", "", 0, "-260.5 179.5", "G1", "20 20", "Rectangle"),
+//
+//                new Hall_Object("chr9", "", 0, "-180.5 179.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr10", "", 0, "-120.5 119.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr11", "", 0, "-120.5 239.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr11", "", 0, "-60.5 179.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr11", "", 0, "119.5 159.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "59.5 219.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-80.5 -100.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-60.5 -60.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-80.5 -20.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-120.5 -0.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-160.5 -20.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-180.5 -60.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-160.5 -100.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "259.5 -100.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "199.5 -40.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "319.5 -40.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "-40.5 59.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "19.5 -0.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "79.5 59.5", "G1", "20 20", "Rectangle"),
+//                new Hall_Object("chr14", "", 0, "19.5 119.5", "G1", "20 20", "Rectangle"),
+//
+//        };
+//
+//        Group_Array[] group_arrays = {
+//                new Group_Array("G1", 0, "-420.5 -120.5", "780 420", "Rectangle")
+//        };
+//
+//        Scheme_Element scheme_element = new Scheme_Element(1, "MainHall", table_objects, hall_objects, group_arrays);
+
+
+
+
+
 //        p.setStyle(Paint.Style.FILL);
 //        p.setColor(Color.rgb(128, 128, 128));
 //        canvas.drawPaint(p);
